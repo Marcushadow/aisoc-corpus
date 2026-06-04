@@ -1,17 +1,11 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
+import CategoryNav from "../../components/CategoryNav.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { CATEGORY_LABELS } from "../../lib/categories";
+import { topicSlugFromId } from "../../lib/topic-slugs";
 
 type Topic = CollectionEntry<"topics">;
-type TopicCategory = Topic["data"]["category"];
-
-const categoryLabels: Record<TopicCategory, string> = {
-  "classical-ml": "Classical ML",
-  "deep-learning": "Deep Learning",
-  generative: "Generative",
-  "reinforcement-learning": "Reinforcement Learning",
-  "world-modelling": "World Modelling",
-};
 
 const topics = (await getCollection("topics")).sort((a: Topic, b: Topic) =>
   a.data.title.localeCompare(b.data.title),
@@ -20,7 +14,7 @@ const topics = (await getCollection("topics")).sort((a: Topic, b: Topic) =>
 const normalizeSearchText = (value: string) => value.toLowerCase().trim();
 
 const searchIndex = topics.map((topic: Topic) => {
-  const categoryLabel = categoryLabels[topic.data.category];
+  const categoryLabel = CATEGORY_LABELS[topic.data.category];
   const searchableParts = [
     topic.data.title,
     topic.data.description,
@@ -33,7 +27,7 @@ const searchIndex = topics.map((topic: Topic) => {
   ];
 
   return {
-    id: topic.id.replace(/\.md$/, ""),
+    id: topicSlugFromId(topic.id),
     title: topic.data.title,
     haystack: normalizeSearchText(searchableParts.join(" ")),
   };
@@ -44,9 +38,10 @@ const searchIndexJson = JSON.stringify(searchIndex).replace(/</g, "\\u003c");
 
 <BaseLayout title="Topics">
   <h1>Topics</h1>
-  <p class="topic-count">
-    {topics.length} topic{topics.length !== 1 ? "s" : ""} across the corpus.
-  </p>
+
+  <section class="topic-categories">
+    <CategoryNav ariaLabel="Browse topics by category" />
+  </section>
 
   <section class="topic-search">
     <label for="topic-search-input">Search topics</label>
@@ -67,17 +62,17 @@ const searchIndexJson = JSON.stringify(searchIndex).replace(/</g, "\\u003c");
     {
       topics.map((topic: Topic) => (
         <a
-          href={`/topics/${topic.id.replace(/\.md$/, "")}`}
+          href={`/topics/${topicSlugFromId(topic.id)}`}
           class="topic-card"
           data-topic-card
-          data-topic-id={topic.id.replace(/\.md$/, "")}
+          data-topic-id={topicSlugFromId(topic.id)}
         >
           <div class="topic-card__meta">
             <span class="topic-difficulty" data-level={topic.data.difficulty}>
               {topic.data.difficulty}
             </span>
             <span class="topic-category">
-              {categoryLabels[topic.data.category]}
+              {CATEGORY_LABELS[topic.data.category]}
             </span>
           </div>
           <h3>{topic.data.title}</h3>
@@ -145,7 +140,11 @@ const searchIndexJson = JSON.stringify(searchIndex).replace(/</g, "\\u003c");
 
   .topic-count {
     color: var(--color-muted);
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .topic-categories {
+    margin-bottom: 1.5rem;
   }
 
   .topic-search {
@@ -173,7 +172,7 @@ const searchIndexJson = JSON.stringify(searchIndex).replace(/</g, "\\u003c");
     min-height: 2.6rem;
     padding: 0.65rem 0.85rem;
     border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 6px;
+    border-radius: 0;
     background: rgba(10, 10, 12, 0.65);
     color: var(--color-text);
     font: inherit;
@@ -207,7 +206,7 @@ const searchIndexJson = JSON.stringify(searchIndex).replace(/</g, "\\u003c");
   .topic-card {
     padding: 1.25rem;
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-sm);
+    border-radius: 0;
     background: var(--color-surface);
     transition:
       border-color 0.2s ease,
@@ -256,7 +255,7 @@ const searchIndexJson = JSON.stringify(searchIndex).replace(/</g, "\\u003c");
     text-transform: uppercase;
     letter-spacing: 0.12em;
     padding: 0.2rem 0.5rem;
-    border-radius: 4px;
+    border-radius: 0;
   }
 
   .topic-difficulty {

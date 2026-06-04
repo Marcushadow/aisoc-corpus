@@ -1,29 +1,27 @@
 ---
 import { getCollection, type CollectionEntry } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import {
+  CATEGORY_LABELS,
+  TOPIC_CATEGORIES,
+  type TopicCategoryId,
+} from "../../lib/categories";
+import { topicSlugFromId } from "../../lib/topic-slugs";
 
 type Topic = CollectionEntry<"topics">;
-type TopicCategory = Topic["data"]["category"];
 
 export async function getStaticPaths() {
-  const categories: TopicCategory[] = [
-    "classical-ml",
-    "deep-learning",
-    "generative",
-    "reinforcement-learning",
-    "world-modelling",
-  ];
-  return categories.map((id) => ({ params: { category: id } }));
+  return TOPIC_CATEGORIES.map((category) => ({
+    params: { category: category.id },
+  }));
 }
 
-const category = Astro.params.category as TopicCategory;
+const category = Astro.params.category as TopicCategoryId;
 const allTopics = await getCollection("topics");
 const topics = allTopics.filter(
   (topic: Topic) => topic.data.category === category,
 );
-const label = category
-  .replace(/-/g, " ")
-  .replace(/\b\w/g, (c: string) => c.toUpperCase());
+const label = CATEGORY_LABELS[category];
 ---
 
 <BaseLayout title={label}>
@@ -35,7 +33,7 @@ const label = category
   <div class="topic-grid">
     {
       topics.map((topic: Topic) => (
-        <a href={`/topics/${topic.id.replace(/\.md$/, "")}`} class="topic-card">
+        <a href={`/topics/${topicSlugFromId(topic.id)}`} class="topic-card">
           <span class="topic-difficulty" data-level={topic.data.difficulty}>
             {topic.data.difficulty}
           </span>
@@ -62,7 +60,7 @@ const label = category
   .topic-card {
     padding: 1.25rem;
     border: 1px solid var(--color-border);
-    border-radius: var(--radius-sm);
+    border-radius: 0;
     background: var(--color-surface);
     transition:
       border-color 0.2s ease,
@@ -90,7 +88,7 @@ const label = category
     text-transform: uppercase;
     letter-spacing: 0.15em;
     padding: 0.2rem 0.5rem;
-    border-radius: 4px;
+    border-radius: 0;
     background: rgba(204, 255, 0, 0.1);
     color: var(--color-accent);
   }

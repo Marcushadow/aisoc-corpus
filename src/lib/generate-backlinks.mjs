@@ -10,14 +10,24 @@ const OUTPUT_PATH = path.resolve("src/lib/backlinks.json");
 
 const wikiLinkRegex = /\[\[([^\]|]+)(?:\|[^\]]+)?\]\]/g;
 
+function findMdFiles(dir) {
+  let results = [];
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const full = path.join(dir, entry.name);
+    if (entry.isDirectory()) results = results.concat(findMdFiles(full));
+    else if (entry.name.endsWith(".md")) results.push(full);
+  }
+  return results;
+}
+
 export function generateBacklinks() {
-  const files = fs.readdirSync(TOPICS_DIR).filter((f) => f.endsWith(".md"));
+  const files = findMdFiles(TOPICS_DIR);
   /** @type {Record<string, {slug: string, title: string}[]>} */
   const backlinks = {};
 
   for (const file of files) {
-    const slug = file.replace(/\.md$/, "");
-    const content = fs.readFileSync(path.join(TOPICS_DIR, file), "utf-8");
+    const slug = path.basename(file, ".md");
+    const content = fs.readFileSync(file, "utf-8");
     const titleMatch = content.match(/^title:\s*(.+)$/m);
     const title = titleMatch ? titleMatch[1].trim() : slug;
 

@@ -57,7 +57,7 @@ export default function HoverPreview() {
         zIndex: 50,
         background: "#161b25",
         border: "1px solid rgba(255,255,255,0.08)",
-        borderRadius: "8px",
+        borderRadius: "0",
         padding: "0.75rem 1rem",
         maxWidth: "260px",
         boxShadow: "0 8px 32px rgba(0,0,0,0.6)",

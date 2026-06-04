@@ -20,9 +20,9 @@
     --color-accent-secondary: #6366f1;
     --color-accent-tertiary: #8b5cf6;
 
-    --radius-sm: 10px;
-    --radius-md: 16px;
-    --radius-lg: 24px;
+    --radius-sm: 0;
+    --radius-md: 0;
+    --radius-lg: 0;
 
     --shadow-panel: 0 0 0 1px rgba(255, 255, 255, 0.04) inset, 0 28px 65px -45px rgba(0, 0, 0, 0.9);
     --shadow-glow: 0 0 18px rgba(204, 255, 0, 0.35);

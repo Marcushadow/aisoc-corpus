@@ -7,6 +7,7 @@
 
 # By default, make @Praneeth-Suresh the owner/reviewer for all files in the repository.
 *       @Praneeth-Suresh
+*       @nusaisoc-bot
 
 # To add specific reviewers for specific paths, define them below.
 # Note: The last matching pattern has the highest precedence.

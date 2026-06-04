@@ -3,6 +3,7 @@ import { getCollection, render, type CollectionEntry } from "astro:content";
 import ReaderLayout from "../../layouts/ReaderLayout.astro";
 import HoverPreview from "../../components/HoverPreview.tsx";
 import backlinksData from "../../lib/backlinks.json";
+import { topicSlugFromId } from "../../lib/topic-slugs";
 
 interface Props {
   topic: CollectionEntry<"topics">;
@@ -11,14 +12,14 @@ interface Props {
 export async function getStaticPaths() {
   const topics = await getCollection("topics");
   return topics.map((topic: CollectionEntry<"topics">) => ({
-    params: { slug: topic.id.replace(/\.md$/, "") },
+    params: { slug: topicSlugFromId(topic.id) },
     props: { topic },
   }));
 }
 
 const { topic } = Astro.props as Props;
 const { Content, headings } = await render(topic);
-const slug = topic.id.replace(/\.md$/, "");
+const slug = topicSlugFromId(topic.id);
 const backlinks =
   (backlinksData as Record<string, { slug: string; title: string }[]>)[slug] ||
   [];
@@ -104,7 +105,7 @@ const backlinks =
     text-transform: uppercase;
     letter-spacing: 0.12em;
     padding: 0.2rem 0.55rem;
-    border-radius: 4px;
+    border-radius: 0;
     background: rgba(204, 255, 0, 0.1);
     color: var(--color-accent);
   }
@@ -112,7 +113,7 @@ const backlinks =
   .meta-tag {
     font-size: 0.65rem;
     padding: 0.2rem 0.5rem;
-    border-radius: 4px;
+    border-radius: 0;
     background: var(--color-surface);
     color: var(--color-muted);
     border: 1px solid var(--color-border);

@@ -23,7 +23,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 
     <ol>
       <li>Fork the repository on GitHub.</li>
-      <li>Add a Markdown file to <code>src/content/topics/</code> with the required frontmatter.</li>
+      <li>Add a Markdown file to <code>src/content/topics/&lt;category&gt;/</code> (e.g. <code>deep-learning/</code>) with the required frontmatter.</li>
       <li>Use <code>[[WikiLinks]]</code> to connect your topic to related concepts.</li>
       <li>Run <code>./scripts/validate-content.sh</code> locally to check your work.</li>
       <li>Submit a pull request. CI verifies everything automatically.</li>
@@ -75,7 +75,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
   .contribute-page code {
     background: var(--color-surface);
     padding: 0.15em 0.4em;
-    border-radius: 4px;
+    border-radius: 0;
     font-size: 0.85em;
   }
 
@@ -91,7 +91,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
     font-family: var(--font-body);
     color: var(--color-accent);
     border: 1px solid var(--color-accent);
-    border-radius: 8px;
+    border-radius: 0;
     transition: all 0.2s ease;
   }
 

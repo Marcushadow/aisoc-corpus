@@ -9,12 +9,26 @@ fail() {
   exit 1
 }
 
+# Collect all .md files recursively
+mapfile -t md_files < <(find "${TOPICS_DIR}" -name '*.md' -type f | LC_ALL=C sort)
+
+# 0. Slug uniqueness check
+printf "Validating slug uniqueness...\n"
+declare -A seen_slugs
+for f in "${md_files[@]}"; do
+  slug="$(basename "$f" .md)"
+  if [[ -n "${seen_slugs[$slug]:-}" ]]; then
+    fail "Duplicate slug '${slug}' found in: $(basename "$(dirname "$f")")/ and $(basename "$(dirname "${seen_slugs[$slug]}")")/"
+  fi
+  seen_slugs[$slug]="$f"
+done
+printf "  Slug uniqueness: OK\n"
+
 # 1. Frontmatter required fields check
 printf "Validating frontmatter...\n"
 required_fields=("title" "description" "author" "difficulty" "category" "domains" "tags")
 
-for f in "${TOPICS_DIR}"/*.md; do
-  [ -f "$f" ] || continue
+for f in "${md_files[@]}"; do
   basename_f="$(basename "$f")"
   for field in "${required_fields[@]}"; do
     if ! grep -q "^${field}:" "$f"; then
@@ -32,11 +46,8 @@ printf "  Frontmatter: OK\n"
 
 # 2. KaTeX equation balance check (multi-line $$ fences must be paired)
 printf "Validating LaTeX equations...\n"
-for f in "${TOPICS_DIR}"/*.md; do
-  [ -f "$f" ] || continue
+for f in "${md_files[@]}"; do
   basename_f="$(basename "$f")"
-  # Count lines that are ONLY $$ (standalone fence lines for multi-line math)
-  # Lines like $$...$$ on one line are self-closing and valid
   fence_count=$(grep -cP '^\$\$\s*$' "$f" || true)
   if (( fence_count % 2 != 0 )); then
     fail "${basename_f}: unbalanced display math fence (\$\$ count: ${fence_count})"
@@ -47,15 +58,12 @@ printf "  LaTeX: OK\n"
 # 3. Internal wikilink broken link check
 printf "Validating internal links...\n"
 existing_slugs=()
-for f in "${TOPICS_DIR}"/*.md; do
-  [ -f "$f" ] || continue
+for f in "${md_files[@]}"; do
   existing_slugs+=("$(basename "$f" .md)")
 done
 
-for f in "${TOPICS_DIR}"/*.md; do
-  [ -f "$f" ] || continue
+for f in "${md_files[@]}"; do
   basename_f="$(basename "$f")"
-  # Extract wikilink targets
   while IFS= read -r slug; do
     [ -z "$slug" ] && continue
     normalized=$(echo "$slug" | tr '[:upper:]' '[:lower:]' | sed 's/ /-/g')
@@ -75,8 +83,7 @@ printf "  Internal links: OK\n"
 
 # 4. Citation URL format check
 printf "Validating citations...\n"
-for f in "${TOPICS_DIR}"/*.md; do
-  [ -f "$f" ] || continue
+for f in "${md_files[@]}"; do
   basename_f="$(basename "$f")"
   while IFS= read -r url; do
     [ -z "$url" ] && continue

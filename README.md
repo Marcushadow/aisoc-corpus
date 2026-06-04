@@ -42,27 +42,27 @@ See [CONTRIBUTING.md](./CONTRIBUTING.md) for detailed instructions on adding top
 
 ### TL;DR
 
-1. Add a `.md` file to `src/content/topics/` with valid frontmatter.
+1. Add a `.md` file to `src/content/topics/<category>/` with valid frontmatter.
 2. Use `[[WikiLinks]]` to connect to other topics.
 3. Run `./scripts/validate-content.sh` locally.
 4. Open a pull request. CI runs automatically.
 
 ## Commands
 
-| Command                           | Description                           |
-| --------------------------------- | ------------------------------------- |
-| `npm run dev`                   | Start development server              |
-| `npm run build`                 | Generate graph + build for production |
-| `npm run preview`               | Preview production build              |
-| `npm test`                      | Run unit tests (Vitest)               |
-| `npm run test:e2e`              | Run E2E tests (Playwright)            |
-| `./scripts/validate-content.sh` | Validate content files                |
-| `./scripts/check.sh`            | Run all deterministic checks          |
+| Command                         | Description                                                              |
+| ------------------------------- | ------------------------------------------------------------------------ |
+| `npm run dev`                   | Start development server (the app will differ from the one from `build`) |
+| `npm run build`                 | Generate graph + build for production                                    |
+| `npm run preview`               | Preview production build (use this locally to check the app)             |
+| `npm test`                      | Run unit tests (Vitest)                                                  |
+| `npm run test:e2e`              | Run E2E tests (Playwright)                                               |
+| `./scripts/validate-content.sh` | Validate content files                                                   |
+| `./scripts/check.sh`            | Run all deterministic checks                                             |
 
 ### Environment Configuration
 
-| Variable      | Value             |
-| ------------- | ----------------- |
+| Variable      | Value           |
+| ------------- | --------------- |
 | Build command | `npm run build` |
 | Build output  | `dist`          |
 | Node version  | `20`            |

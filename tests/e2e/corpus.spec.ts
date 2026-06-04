@@ -4,6 +4,15 @@ test("homepage loads with graph and category buttons", async ({ page }) => {
   await page.goto("/");
   await expect(page.locator("h1")).toContainText("The Corpus");
   await expect(page.locator(".category-nav")).toBeVisible();
+  await expect(page.locator(".category-nav .category-btn")).toHaveCount(5);
+  await expect(page.getByRole("link", { name: "Classical ML" })).toHaveCSS(
+    "color",
+    "rgb(204, 255, 0)",
+  );
+  await expect(page.getByRole("link", { name: "Deep Learning" })).toHaveCSS(
+    "color",
+    "rgb(99, 102, 241)",
+  );
   await expect(
     page.locator("svg[aria-label='Knowledge graph visualization']"),
   ).toBeVisible();
@@ -17,6 +26,10 @@ test("homepage loads with graph and category buttons", async ({ page }) => {
 test("topics page lists all topics", async ({ page }) => {
   await page.goto("/topics");
   await expect(page.locator("h1")).toContainText("Topics");
+  await expect(
+    page.getByRole("navigation", { name: "Browse topics by category" }),
+  ).toBeVisible();
+  await expect(page.locator(".category-nav .category-btn")).toHaveCount(5);
   await expect(page.locator(".topic-card")).toHaveCount(7);
   await expect(
     page.locator(".topic-card", { hasText: "Transformers" }),
@@ -25,6 +38,19 @@ test("topics page lists all topics", async ({ page }) => {
     page.locator(".topic-card", { hasText: "Q-Learning" }),
   ).toBeVisible();
   await expect(page.locator(".topic-card", { hasText: "LIME" })).toBeVisible();
+});
+
+test("topics page category buttons navigate to category pages", async ({
+  page,
+}) => {
+  await page.goto("/topics");
+  const categoryNav = page.getByRole("navigation", {
+    name: "Browse topics by category",
+  });
+
+  await categoryNav.getByRole("link", { name: "Classical ML" }).click();
+  await expect(page).toHaveURL(/\/categories\/classical-ml$/);
+  await expect(page.locator("h1")).toContainText("Classical ML");
 });
 
 test("topics page searches indexed topic metadata", async ({ page }) => {
@@ -51,7 +77,7 @@ test("topics page searches indexed topic metadata", async ({ page }) => {
 
 test("category page lists topics", async ({ page }) => {
   await page.goto("/categories/classical-ml");
-  await expect(page.locator("h1")).toContainText("Classical Ml");
+  await expect(page.locator("h1")).toContainText("Classical ML");
   await expect(page.locator(".topic-card")).toHaveCount(4);
 });
 

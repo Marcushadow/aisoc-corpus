@@ -1,0 +1,83 @@
+---
+import { TOPIC_CATEGORIES } from "../lib/categories";
+
+interface Props {
+  ariaLabel?: string;
+}
+
+const { ariaLabel = "Topic categories" } = Astro.props;
+---
+
+<nav class="category-nav" aria-label={ariaLabel}>
+  {
+    TOPIC_CATEGORIES.map((category) => (
+      <a
+        href={`/categories/${category.id}`}
+        class="category-btn"
+        style={`--category-color: ${category.color}; --category-bg: ${category.color}14; --category-bg-hover: ${category.color}24; --category-border: ${category.color}66; --category-glow: ${category.color}40;`}
+      >
+        <span class="category-btn__swatch" aria-hidden="true" />
+        <span>{category.label}</span>
+      </a>
+    ))
+  }
+</nav>
+
+<style>
+  .category-nav {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.6rem;
+  }
+
+  .category-btn {
+    --category-color: var(--color-accent);
+    --category-bg: rgba(204, 255, 0, 0.08);
+    --category-bg-hover: rgba(204, 255, 0, 0.14);
+    --category-border: rgba(204, 255, 0, 0.4);
+    --category-glow: rgba(204, 255, 0, 0.25);
+
+    display: inline-flex;
+    align-items: center;
+    gap: 0.45rem;
+    min-height: 2.2rem;
+    padding: 0.5rem 0.85rem;
+    border: 1px solid var(--category-border);
+    border-radius: 0;
+    background: var(--category-bg);
+    color: var(--category-color);
+    font-family: var(--font-body);
+    font-size: 0.72rem;
+    letter-spacing: 0;
+    line-height: 1;
+    text-transform: uppercase;
+    transition:
+      background 0.2s ease,
+      border-color 0.2s ease,
+      box-shadow 0.2s ease,
+      transform 0.2s ease;
+  }
+
+  .category-btn:hover,
+  .category-btn:focus-visible {
+    background: var(--category-bg-hover);
+    border-color: var(--category-color);
+    box-shadow: 0 0 12px var(--category-glow);
+    transform: translateY(-1px);
+  }
+
+  .category-btn:focus-visible {
+    outline: 2px solid var(--category-color);
+    outline-offset: 3px;
+  }
+
+  .category-btn__swatch {
+    width: 0.55rem;
+    height: 0.55rem;
+    flex: 0 0 auto;
+    border-radius: 0;
+    background: var(--category-color);
+    box-shadow: 0 0 10px var(--category-glow);
+  }
+</style>

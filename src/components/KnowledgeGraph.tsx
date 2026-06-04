@@ -12,6 +12,7 @@ import { select, type Selection } from "d3-selection";
 import { zoom, zoomIdentity } from "d3-zoom";
 import { drag } from "d3-drag";
 import graphData from "../lib/graph-data.json";
+import { CATEGORY_COLORS, TOPIC_CATEGORIES } from "../lib/categories";
 
 interface GraphNode extends SimulationNodeDatum {
   id: string;
@@ -31,22 +32,6 @@ interface GraphEdge extends SimulationLinkDatum<GraphNode> {
   type: "prerequisite" | "similarity";
   weight?: number;
 }
-
-const CATEGORIES = [
-  { id: "classical-ml", label: "Classical ML", color: "#ccff00" },
-  { id: "deep-learning", label: "Deep Learning", color: "#6366f1" },
-  { id: "generative", label: "Generative", color: "#8b5cf6" },
-  {
-    id: "reinforcement-learning",
-    label: "Reinforcement Learning",
-    color: "#f59e0b",
-  },
-  { id: "world-modelling", label: "World Modelling", color: "#06b6d4" },
-] as const;
-
-const CATEGORY_COLORS: Record<string, string> = Object.fromEntries(
-  CATEGORIES.map((category) => [category.id, category.color]),
-);
 
 type ViewMode = "all" | "prerequisite" | "similarity";
 
@@ -199,7 +184,7 @@ export default function KnowledgeGraph() {
               background:
                 viewMode === mode ? "rgba(204,255,0,0.15)" : "transparent",
               border: `1px solid ${viewMode === mode ? "#ccff00" : "rgba(255,255,255,0.08)"}`,
-              borderRadius: "6px",
+              borderRadius: "0",
               color: viewMode === mode ? "#ccff00" : "#a1a1aa",
               cursor: "pointer",
             }}
@@ -219,7 +204,7 @@ export default function KnowledgeGraph() {
         height="500"
         style={{
           background: "rgba(10,10,12,0.6)",
-          borderRadius: "12px",
+          borderRadius: "0",
           border: "1px solid rgba(255,255,255,0.08)",
         }}
         aria-label="Knowledge graph visualization"
@@ -237,7 +222,7 @@ export default function KnowledgeGraph() {
           fontSize: "0.72rem",
         }}
       >
-        {CATEGORIES.map((category) => (
+        {TOPIC_CATEGORIES.map((category) => (
           <span
             key={category.id}
             style={{
@@ -253,7 +238,7 @@ export default function KnowledgeGraph() {
               style={{
                 width: "0.6rem",
                 height: "0.6rem",
-                borderRadius: "50%",
+                borderRadius: "0",
                 background: category.color,
                 boxShadow: `0 0 10px ${category.color}66`,
               }}

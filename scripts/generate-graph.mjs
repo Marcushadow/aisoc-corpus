@@ -68,15 +68,25 @@ function jaccard(a, b) {
   return union === 0 ? 0 : intersection / union;
 }
 
+function findMdFiles(dir) {
+  let results = [];
+  for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
+    const full = path.join(dir, entry.name);
+    if (entry.isDirectory()) results = results.concat(findMdFiles(full));
+    else if (entry.name.endsWith(".md")) results.push(full);
+  }
+  return results;
+}
+
 export function generateGraphData() {
-  const files = fs.readdirSync(TOPICS_DIR).filter((f) => f.endsWith(".md"));
+  const files = findMdFiles(TOPICS_DIR);
   const nodes = [];
   const edges = [];
 
   // Parse all topics
   for (const file of files) {
-    const slug = file.replace(/\.md$/, "");
-    const content = fs.readFileSync(path.join(TOPICS_DIR, file), "utf-8");
+    const slug = path.basename(file, ".md");
+    const content = fs.readFileSync(file, "utf-8");
     const fm = parseFrontmatter(content);
     nodes.push({
       id: slug,
