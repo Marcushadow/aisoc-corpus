@@ -1,17 +1,12 @@
 ---
 title: Probability And Bayesian Inference
 description: the bayesian perspective of things
-author: Benjamin Goh
+author: checkpoint214159
 difficulty: beginner
 category: classical-ml
-domains:
-  - statistics
-  - probability 
-  - bayes theorem
-  - frequentist
-  - bayesian
-tags:
-prerequisites: None. Enjoy!
+domains: ["statistics", "probability"]
+tags: ["bayes-theorem", "conditional-probability", "bayesian-inference", "frequentist-statistics", "prior-posterior"]
+prerequisites: []
 ---
 Hello reader! This is ben. Bayesian inference and, well, everything bayes, is pretty general and expansive. As a result, if you feel lost at any point in terminologies or semantics, my advice would be to  abstract the concept to a simpler explanation for now, and bookmark it and read up on it at a later date. In general, the discomfort you feel when reading something new you don't understand is perfectly natural, and actually a very good thing! By Mere Exposure you'd probably begin to subconsciously adopt the terminology and understanding of all this.
 
