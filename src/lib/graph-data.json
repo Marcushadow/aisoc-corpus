@@ -133,6 +133,27 @@
       "prerequisites": [
         "gradient-descent"
       ]
+    },
+    {
+      "id": "world-models",
+      "title": "World Models",
+      "category": "world-modelling",
+      "difficulty": "intermediate",
+      "domains": [
+        "reinforcement-learning",
+        "model-based-rl",
+        "representation-learning"
+      ],
+      "tags": [
+        "latent-dynamics",
+        "planning",
+        "imagination",
+        "model-bias"
+      ],
+      "prerequisites": [
+        "neural-networks",
+        "q-learning"
+      ]
     }
   ],
   "edges": [
@@ -164,6 +185,16 @@
     {
       "source": "gradient-descent",
       "target": "q-learning",
+      "type": "prerequisite"
+    },
+    {
+      "source": "neural-networks",
+      "target": "world-models",
+      "type": "prerequisite"
+    },
+    {
+      "source": "q-learning",
+      "target": "world-models",
       "type": "prerequisite"
     },
     {
