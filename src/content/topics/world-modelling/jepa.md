@@ -1,21 +1,27 @@
 ---
 title: Joint-Embedding Predictive Architecture
-description: An introduction to how JEPA learns by predicting latent representations, examples of how JEPA is used and the challenges that comes with using JEPA
+description: An introduction to how JEPA learns by predicting latent representations, with examples from I-JEPA and action-conditioned world models.
 author: Kia-Lok
 difficulty: intermediate
-category: world-models
+category: world-modelling
+domains: [self-supervised-learning, representation-learning, computer-vision, rl]
 tags: [world-models, reinforcement-learning, computer-vision]
 citations:
-  - "Yann LeCun. A Path Towards Autonomous Machine Intelligence. 2022. https://openreview.net/pdf?id=BZ5a1r-kVsf"
-  - "Mahmoud Assran, Quentin Duval, Ishan Misra, Piotr Bojanowski, Pascal Vincent, Michael Rabbat, Yann LeCun, and Nicolas Ballas. Self-Supervised Learning from Images with a Joint-Embedding Predictive Architecture. CVPR, 2023. https://openaccess.thecvf.com/content/CVPR2023/html/Assran_Self-Supervised_Learning_From_Images_With_a_Joint-Embedding_Predictive_Architecture_CVPR_2023_paper.html"
-  - "Adrien Bardes, Quentin Garrido, Jean Ponce, Xinlei Chen, Michael Rabbat, Yann LeCun, Mahmoud Assran, and Nicolas Ballas. Revisiting Feature Prediction for Learning Visual Representations from Video. TMLR, 2024. https://arxiv.org/abs/2404.08471"
-  - "Lucas Maes, Quentin Le Lidec, Damien Scieur, Yann LeCun, and Randall Balestriero. LeWorldModel: Stable End-to-End Joint-Embedding Predictive Architecture from Pixels. arXiv, 2026. https://arxiv.org/abs/2603.19312"
-  - "Randall Balestriero and Yann LeCun. LeJEPA: Provable and Scalable Self-Supervised Learning Without the Heuristics. arXiv, 2025. https://arxiv.org/abs/2511.08544"
-  - "Xianhang Li, Chen Huang, Chun-Liang Li, Eran Malach, Joshua M. Susskind, Vimal Thilak, and Etai Littwin. Rethinking JEPA: Compute-Efficient Video Self-Supervised Learning with Frozen Teachers. ICLR, 2026. https://openreview.net/forum?id=3cB9243E9i"
-  - "Yongchao Huang. VJEPA: Variational Joint Embedding Predictive Architectures as Probabilistic World Models. arXiv, 2026. https://arxiv.org/abs/2601.14354"
+  - title: A Path Towards Autonomous Machine Intelligence
+    url: https://openreview.net/pdf?id=BZ5a1r-kVsf
+  - title: Self-Supervised Learning from Images with a Joint-Embedding Predictive Architecture
+    url: https://openaccess.thecvf.com/content/CVPR2023/html/Assran_Self-Supervised_Learning_From_Images_With_a_Joint-Embedding_Predictive_Architecture_CVPR_2023_paper.html
+  - title: Revisiting Feature Prediction for Learning Visual Representations from Video
+    url: https://arxiv.org/abs/2404.08471
+  - title: LeWorldModel - Stable End-to-End Joint-Embedding Predictive Architecture from Pixels
+    url: https://arxiv.org/abs/2603.19312
+  - title: LeJEPA - Provable and Scalable Self-Supervised Learning Without the Heuristics
+    url: https://arxiv.org/abs/2511.08544
+  - title: Rethinking JEPA - Compute-Efficient Video Self-Supervised Learning with Frozen Teachers
+    url: https://openreview.net/forum?id=3cB9243E9i
+  - title: VJEPA - Variational Joint Embedding Predictive Architectures as Probabilistic World Models
+    url: https://arxiv.org/abs/2601.14354
 ---
-
-# Joint-Embedding Predictive Architecture
 
 ## Motivation Behind JEPA
 
