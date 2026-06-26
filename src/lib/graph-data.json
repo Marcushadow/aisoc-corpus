@@ -151,6 +151,24 @@
       "prerequisites": [
         "gradient-descent"
       ]
+    },
+    {
+      "id": "why-you-should-care-about-ppo",
+      "title": "Why you should care about PPO",
+      "category": "classical-ml",
+      "difficulty": "beginner",
+      "domains": [
+        "statistics",
+        "probability"
+      ],
+      "tags": [
+        "bayes-theorem",
+        "conditional-probability",
+        "bayesian-inference",
+        "frequentist-statistics",
+        "prior-posterior"
+      ],
+      "prerequisites": []
     }
   ],
   "edges": [
@@ -189,6 +207,12 @@
       "target": "support-vector-machines",
       "type": "similarity",
       "weight": 0.33
+    },
+    {
+      "source": "probability-and-bayesian-inference",
+      "target": "why-you-should-care-about-ppo",
+      "type": "similarity",
+      "weight": 1
     }
   ]
 }
