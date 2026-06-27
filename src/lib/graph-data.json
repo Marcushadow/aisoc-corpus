@@ -17,7 +17,8 @@
       ],
       "prerequisites": [
         "linear-regression"
-      ]
+      ],
+      "depth": 1
     },
     {
       "id": "lime",
@@ -37,7 +38,8 @@
       ],
       "prerequisites": [
         "linear-regression"
-      ]
+      ],
+      "depth": 1
     },
     {
       "id": "linear-regression",
@@ -54,7 +56,8 @@
         "statistics",
         "least-squares"
       ],
-      "prerequisites": []
+      "prerequisites": [],
+      "depth": 0
     },
     {
       "id": "probability-and-bayesian-inference",
@@ -72,7 +75,8 @@
         "frequentist-statistics",
         "prior-posterior"
       ],
-      "prerequisites": []
+      "prerequisites": [],
+      "depth": 0
     },
     {
       "id": "support-vector-machines",
@@ -92,7 +96,8 @@
       ],
       "prerequisites": [
         "linear-regression"
-      ]
+      ],
+      "depth": 1
     },
     {
       "id": "neural-networks",
@@ -111,7 +116,8 @@
       ],
       "prerequisites": [
         "gradient-descent"
-      ]
+      ],
+      "depth": 2
     },
     {
       "id": "transformers",
@@ -131,7 +137,8 @@
       ],
       "prerequisites": [
         "neural-networks"
-      ]
+      ],
+      "depth": 3
     },
     {
       "id": "q-learning",
@@ -150,25 +157,31 @@
       ],
       "prerequisites": [
         "gradient-descent"
-      ]
+      ],
+      "depth": 2
     },
     {
       "id": "why-you-should-care-about-ppo",
       "title": "Why you should care about PPO",
-      "category": "classical-ml",
-      "difficulty": "beginner",
+      "category": "reinforcement-learning",
+      "difficulty": "intermediate",
       "domains": [
-        "statistics",
-        "probability"
+        "reinforcement-learning",
+        "policy-gradients"
       ],
       "tags": [
-        "bayes-theorem",
-        "conditional-probability",
-        "bayesian-inference",
-        "frequentist-statistics",
-        "prior-posterior"
+        "trust-region",
+        "policy-optimization",
+        "exploration-exploitation",
+        "actor-critic",
+        "clipped-surrogate"
       ],
-      "prerequisites": []
+      "prerequisites": [
+        "policy-gradients",
+        "gradient-descent",
+        "q-learning"
+      ],
+      "depth": 3
     }
   ],
   "edges": [
@@ -203,16 +216,20 @@
       "type": "prerequisite"
     },
     {
+      "source": "gradient-descent",
+      "target": "why-you-should-care-about-ppo",
+      "type": "prerequisite"
+    },
+    {
+      "source": "q-learning",
+      "target": "why-you-should-care-about-ppo",
+      "type": "prerequisite"
+    },
+    {
       "source": "linear-regression",
       "target": "support-vector-machines",
       "type": "similarity",
       "weight": 0.33
-    },
-    {
-      "source": "probability-and-bayesian-inference",
-      "target": "why-you-should-care-about-ppo",
-      "type": "similarity",
-      "weight": 1
     }
   ]
 }
