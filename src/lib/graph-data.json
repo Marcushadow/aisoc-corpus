@@ -157,6 +157,27 @@
       ],
       "prerequisites": [
         "gradient-descent"
+      ]
+    },
+    {
+      "id": "world-models",
+      "title": "World Models",
+      "category": "world-modelling",
+      "difficulty": "intermediate",
+      "domains": [
+        "reinforcement-learning",
+        "model-based-rl",
+        "representation-learning"
+      ],
+      "tags": [
+        "latent-dynamics",
+        "planning",
+        "imagination",
+        "model-bias"
+      ],
+      "prerequisites": [
+        "neural-networks",
+        "q-learning"
       ],
       "depth": 2
     },
@@ -216,13 +237,22 @@
       "type": "prerequisite"
     },
     {
+<<<<<<< HEAD
       "source": "gradient-descent",
       "target": "why-you-should-care-about-ppo",
+=======
+      "source": "neural-networks",
+      "target": "world-models",
+>>>>>>> 9de724cd5781c4b4588e74276faaae292ec54cd3
       "type": "prerequisite"
     },
     {
       "source": "q-learning",
+<<<<<<< HEAD
       "target": "why-you-should-care-about-ppo",
+=======
+      "target": "world-models",
+>>>>>>> 9de724cd5781c4b4588e74276faaae292ec54cd3
       "type": "prerequisite"
     },
     {
