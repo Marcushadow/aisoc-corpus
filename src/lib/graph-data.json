@@ -1,6 +1,32 @@
 {
   "nodes": [
     {
+      "id": "vae",
+      "title": "Autoencoders",
+      "category": "deep-learning",
+      "difficulty": "intermediate",
+      "domains": [
+        "unsupervised-learning",
+        "generative-models",
+        "representation-learning"
+      ],
+      "tags": [
+        "autoencoders",
+        "variational-inference",
+        "vae",
+        "vq-vae",
+        "reparameterisation",
+        "gumbel-softmax",
+        "reinforce",
+        "elbo",
+        "kl-divergence"
+      ],
+      "prerequisites": [
+        "gradient-descent"
+      ],
+      "depth": 2
+    },
+    {
       "id": "gradient-descent",
       "title": "Gradient Descent",
       "category": "classical-ml",
@@ -157,27 +183,6 @@
       ],
       "prerequisites": [
         "gradient-descent"
-      ]
-    },
-    {
-      "id": "world-models",
-      "title": "World Models",
-      "category": "world-modelling",
-      "difficulty": "intermediate",
-      "domains": [
-        "reinforcement-learning",
-        "model-based-rl",
-        "representation-learning"
-      ],
-      "tags": [
-        "latent-dynamics",
-        "planning",
-        "imagination",
-        "model-bias"
-      ],
-      "prerequisites": [
-        "neural-networks",
-        "q-learning"
       ],
       "depth": 2
     },
@@ -203,9 +208,55 @@
         "q-learning"
       ],
       "depth": 3
+    },
+    {
+      "id": "jepa",
+      "title": "Joint-Embedding Predictive Architecture",
+      "category": "world-modelling",
+      "difficulty": "intermediate",
+      "domains": [
+        "self-supervised-learning",
+        "representation-learning",
+        "computer-vision",
+        "rl"
+      ],
+      "tags": [
+        "world-models",
+        "reinforcement-learning",
+        "computer-vision"
+      ],
+      "prerequisites": [],
+      "depth": 0
+    },
+    {
+      "id": "world-models",
+      "title": "World Models",
+      "category": "world-modelling",
+      "difficulty": "intermediate",
+      "domains": [
+        "reinforcement-learning",
+        "model-based-rl",
+        "representation-learning"
+      ],
+      "tags": [
+        "latent-dynamics",
+        "planning",
+        "imagination",
+        "model-bias"
+      ],
+      "prerequisites": [
+        "neural-networks",
+        "q-learning"
+      ],
+      "depth": 3
     }
   ],
   "edges": [
+    {
+      "source": "gradient-descent",
+      "target": "vae",
+      "type": "prerequisite"
+    },
     {
       "source": "linear-regression",
       "target": "gradient-descent",
@@ -237,22 +288,23 @@
       "type": "prerequisite"
     },
     {
-<<<<<<< HEAD
       "source": "gradient-descent",
       "target": "why-you-should-care-about-ppo",
-=======
-      "source": "neural-networks",
-      "target": "world-models",
->>>>>>> 9de724cd5781c4b4588e74276faaae292ec54cd3
       "type": "prerequisite"
     },
     {
       "source": "q-learning",
-<<<<<<< HEAD
       "target": "why-you-should-care-about-ppo",
-=======
+      "type": "prerequisite"
+    },
+    {
+      "source": "neural-networks",
       "target": "world-models",
->>>>>>> 9de724cd5781c4b4588e74276faaae292ec54cd3
+      "type": "prerequisite"
+    },
+    {
+      "source": "q-learning",
+      "target": "world-models",
       "type": "prerequisite"
     },
     {
