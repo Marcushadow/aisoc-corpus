@@ -33,7 +33,8 @@ Once again, we assume you know the prerequisites: namely, the Policy Gradient th
 
 First, denote the probability ratio between old and new policies as: 
 
-$$\Large 
+$$
+\Large 
 r_\theta = \frac{\pi_\theta(a_t|s_t)}{\pi_{\theta_\text{old}}(a_t|s_t)}
 $$
 
@@ -41,7 +42,8 @@ This ratio is the **surrogate objective**: the thing both TRPO and PPO actually 
 
 For TRPO in particular, the paper is dense with many different formulations and theories about *monotonic improvement guarantees* and *Fisher information matrices as the metric for measuring constraint curvature*. Thats a whole lotta words! You should go read it yourself if you are a supreme math nerd, but to keep it (much) simpler, for both, they tackle the above fundemental problem: catastrophic policy updates. Fundementally, TRPO uses a Kullback-Leibler (KL) Divergence to constrain the size of updates to the policy:
 
-$$\Large
+$$
+\Large
 \text{maximize}_\theta \quad \hat{\mathbb{E}}_t
 \left[r_\theta\hat{A}_t\right]
 \quad \text{subject to} \quad D_{KL}\!\left(\pi_{\theta_\text{old}} \,\|\, \pi_\theta\right) \leq \delta
@@ -65,7 +67,8 @@ PPO takes the less mathematically rigorous but far more scalable approach of sta
 
 The "Proximal" term in PPO comes from optimization theory: proximal methods are optimization techniques that handle constraints by staying close to a reference point. That pretty much motivates what comes next: instead of the hard KL constraint from TRPO, PPO imposes an $\varepsilon$-band around the ratio, clipping it to stay within $[1-\varepsilon, 1+\varepsilon]$: 
 
-$$\Large
+$$
+\Large
 L^{\text{CLIP}}(\theta) = \hat{\mathbb{E}}_t\!\left[\min\!\left(r_\theta\hat{A}_t,\; \text{clip}(r_\theta,\, 1-\varepsilon,\, 1+\varepsilon)\,\hat{A}_t\right)\right]
 $$
 
