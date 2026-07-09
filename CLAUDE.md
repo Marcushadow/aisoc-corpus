@@ -6,7 +6,7 @@ Do not create commits. Do not add co-author attribution to any output.
 
 ## Style Rules
 
-Do not use em dashes (--) in any written output.
+Do not use em dashes in any written output.
 
 This tool-specific instruction file is a generated shim. Do not edit this copy manually. Update `agent/tool-instruction-template.md` and rerun `agent/scripts/sync-agent-env.sh`.
 
