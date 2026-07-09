@@ -9,6 +9,10 @@
       "title": "LIME (Local Interpretable Model-agnostic Explanations)"
     },
     {
+      "slug": "peft",
+      "title": "\"PEFT\""
+    },
+    {
       "slug": "transformers",
       "title": "Transformers"
     },
@@ -29,6 +33,14 @@
     {
       "slug": "neural-networks",
       "title": "Neural Networks"
+    },
+    {
+      "slug": "peft",
+      "title": "\"PEFT\""
+    },
+    {
+      "slug": "agent-reward-hacking",
+      "title": "\"Agent Reward Hacking\""
     }
   ],
   "linear-regression": [
@@ -39,6 +51,10 @@
     {
       "slug": "support-vector-machines",
       "title": "Support Vector Machines"
+    },
+    {
+      "slug": "peft",
+      "title": "\"PEFT\""
     }
   ],
   "support-vector-machines": [
@@ -49,6 +65,10 @@
     {
       "slug": "linear-regression",
       "title": "Linear Regression"
+    },
+    {
+      "slug": "peft",
+      "title": "\"PEFT\""
     }
   ],
   "gradient-descent": [
@@ -69,6 +89,10 @@
       "title": "Neural Networks"
     },
     {
+      "slug": "peft",
+      "title": "\"PEFT\""
+    },
+    {
       "slug": "transformers",
       "title": "Transformers"
     },
@@ -79,8 +103,18 @@
   ],
   "q-learning": [
     {
+      "slug": "agent-reward-hacking",
+      "title": "\"Agent Reward Hacking\""
+    },
+    {
       "slug": "world-models",
       "title": "World Models"
+    }
+  ],
+  "world-models": [
+    {
+      "slug": "agent-reward-hacking",
+      "title": "\"Agent Reward Hacking\""
     }
   ]
 }
